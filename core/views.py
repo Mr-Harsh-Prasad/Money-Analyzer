@@ -67,6 +67,8 @@ def dashboard(request):
       user=user, is_income=False, date__gte=current_month_start
   ).aggregate(total=Sum('amount'))['total'] or 0
 
+  transactions = Transaction.objects.filter(user=user).order_by('-date', '-created_at')[:5]
+
   context = {
       'total_income': total_income,
       'total_expense': total_expense,
