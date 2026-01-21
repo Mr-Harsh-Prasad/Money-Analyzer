@@ -1,19 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Expense Tracker Dashboard</title>
   <style>
-    :root{
-      --teal:#a8dadc;
-      --blue:#457b9d;
-      --navy:#1d3557;
-      --pink:#ffe5ec;
-      --cream:#f1faee;
-      --red:#e63946;
-      --bg:#fdfdfd;
+    :root {
+      --teal: #a8dadc;
+      --blue: #457b9d;
+      --navy: #1d3557;
+      --pink: #ffe5ec;
+      --cream: #f1faee;
+      --red: #e63946;
+      --bg: #fdfdfd;
     }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -30,17 +32,20 @@
       justify-content: space-between;
       color: #fff;
     }
+
     .brand {
       font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: 0.5px;
     }
+
     nav a {
       margin: 0 10px;
       color: #fff;
       text-decoration: none;
       font-weight: 500;
     }
+
     nav a:hover {
       color: var(--pink);
     }
@@ -58,15 +63,18 @@
       padding: 1.2rem;
       border-right: 2px solid #e0e0e0;
     }
+
     .sidebar h3 {
       margin: 0 0 1rem;
       color: var(--blue);
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     .sidebar li {
       display: flex;
       align-items: center;
@@ -78,10 +86,12 @@
       padding: 0.5rem 0.6rem;
       border-radius: 8px;
     }
+
     .sidebar li:hover {
       background: #fff;
       color: var(--red);
     }
+
     .budget {
       margin-top: 1.5rem;
       background: #fff;
@@ -89,12 +99,14 @@
       border-radius: 10px;
       padding: 1rem;
     }
+
     .budget label {
       display: block;
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 0.5rem;
     }
+
     .budget input {
       width: 100%;
       padding: 0.7rem;
@@ -102,6 +114,7 @@
       border-radius: 8px;
       margin-bottom: 0.8rem;
     }
+
     .btn {
       background: var(--teal);
       color: #fff;
@@ -111,7 +124,10 @@
       cursor: pointer;
       font-weight: 600;
     }
-    .btn:hover { background: var(--blue); }
+
+    .btn:hover {
+      background: var(--blue);
+    }
 
     /* Main content */
     .main {
@@ -125,24 +141,30 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
+
     .card {
       background: var(--pink);
       padding: 1.2rem;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
+
     .card h2 {
       margin: 0 0 0.25rem;
       font-size: 1.05rem;
       color: #6d6875;
     }
+
     .card p {
       font-size: 1.5rem;
       font-weight: 700;
       margin: 0.2rem 0 0.6rem;
       color: var(--navy);
     }
-    .card small { color:#666; }
+
+    .card small {
+      color: #666;
+    }
 
     /* Tools row */
     .tools {
@@ -151,13 +173,17 @@
       gap: 1rem;
       margin: 1rem 0 1.5rem;
     }
-    .search-filter, .date-filter {
+
+    .search-filter,
+    .date-filter {
       background: #fafafa;
       padding: 1rem;
       border-radius: 10px;
       border: 1px solid #eee;
     }
-    .tools input, .tools select {
+
+    .tools input,
+    .tools select {
       width: 100%;
       padding: 0.6rem;
       border: 1px solid #ccc;
@@ -173,34 +199,41 @@
       border: 1px solid #eee;
       margin-bottom: 1rem;
     }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.8rem;
     }
+
     .form-section label {
       display: block;
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 0.35rem;
     }
-    .form-section input, .form-section select {
+
+    .form-section input,
+    .form-section select {
       width: 100%;
       padding: 0.6rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
     .form-actions {
       margin-top: 0.8rem;
       display: flex;
       gap: 0.8rem;
       flex-wrap: wrap;
     }
+
     .btn-outline {
       background: #fff;
       color: var(--blue);
       border: 1px solid var(--blue);
     }
+
     .btn-outline:hover {
       background: var(--blue);
       color: #fff;
@@ -215,22 +248,30 @@
       overflow: hidden;
       border: 1px solid #eee;
     }
-    th, td {
+
+    th,
+    td {
       padding: 0.9rem;
       text-align: left;
       border-bottom: 1px solid #eee;
       vertical-align: middle;
     }
+
     th {
       background: var(--teal);
       color: #fff;
       font-weight: 600;
     }
-    tr:hover { background: var(--cream); }
+
+    tr:hover {
+      background: var(--cream);
+    }
+
     .actions {
       display: flex;
       gap: 0.4rem;
     }
+
     .action-btn {
       padding: 0.3rem 0.6rem;
       border-radius: 6px;
@@ -238,10 +279,27 @@
       cursor: pointer;
       font-weight: 600;
     }
-    .edit { background: #fff; color: var(--blue); border:1px solid var(--blue);}
-    .delete { background: var(--red); color: #fff; }
-    .save { background: var(--teal); color: #fff; }
-    .cancel { background: #aaa; color: #fff; }
+
+    .edit {
+      background: #fff;
+      color: var(--blue);
+      border: 1px solid var(--blue);
+    }
+
+    .delete {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .save {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .cancel {
+      background: #aaa;
+      color: #fff;
+    }
 
     /* Charts section */
     .charts {
@@ -250,12 +308,14 @@
       gap: 1rem;
       margin: 1rem 0;
     }
+
     .chart-card {
       background: #fafafa;
       border: 1px solid #eee;
       border-radius: 10px;
       padding: 1rem;
     }
+
     .chart-card h3 {
       margin: 0 0 0.5rem;
       color: var(--blue);
@@ -273,38 +333,72 @@
       color: #fff;
       padding: 1rem 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       font-size: 1rem;
       text-align: center;
       z-index: 1000;
     }
+
     .popup.show {
       display: block;
       animation: fadeInOut 3s forwards;
     }
+
     @keyframes fadeInOut {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
+      0% {
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     /* Responsive */
     @media (max-width: 980px) {
-      .dashboard { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
-      .cards { grid-template-columns: 1fr 1fr; }
-      .form-grid { grid-template-columns: 1fr 1fr; }
-      .charts { grid-template-columns: 1fr; }
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .charts {
+        grid-template-columns: 1fr;
+      }
     }
+
     @media (max-width: 560px) {
-      .cards { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <!-- Header -->
   <header>
@@ -491,19 +585,19 @@
     }
 
     // Helpers
-    function currency(n){ return '₹' + Number(n).toFixed(2); }
-    function showPopup(msg){
+    function currency(n) { return '₹' + Number(n).toFixed(2); }
+    function showPopup(msg) {
       const popup = document.getElementById('popup');
       popup.textContent = msg;
       popup.classList.add('show');
-      setTimeout(()=>popup.classList.remove('show'), 3000);
+      setTimeout(() => popup.classList.remove('show'), 3000);
     }
-    function scrollToSection(id){
-      document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+    function scrollToSection(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Budget
-    function saveBudget(){
+    function saveBudget() {
       const val = document.getElementById('monthlyBudget').value;
       monthlyBudget = val ? Number(val) : null;
       localStorage.setItem(BUDGET_KEY, monthlyBudget ?? '');
@@ -511,13 +605,13 @@
       updateBudgetStatus();
       showPopup('✅ Budget saved!');
     }
-    function updateBudgetStatus(){
+    function updateBudgetStatus() {
       const status = document.getElementById('budgetStatus');
       const monthTotal = sumThisMonth();
-      if(monthlyBudget && monthTotal > monthlyBudget){
+      if (monthlyBudget && monthTotal > monthlyBudget) {
         status.textContent = `Alert: Exceeded budget by ${currency(monthTotal - monthlyBudget)}`;
         status.style.color = varColor('--red');
-      } else if(monthlyBudget){
+      } else if (monthlyBudget) {
         status.textContent = `Remaining: ${currency(monthlyBudget - monthTotal)}`;
         status.style.color = varColor('--navy');
       } else {
@@ -525,26 +619,26 @@
         status.style.color = '#666';
       }
     }
-    function varColor(name){
+    function varColor(name) {
       return getComputedStyle(document.documentElement).getPropertyValue(name);
     }
 
     // Add sample data
-    function seedSample(){
+    function seedSample() {
       expenses = [
-        {id:uid(), date:'2025-11-10', category:'Food', description:'Lunch', amount:12},
-        {id:uid(), date:'2025-11-09', category:'Hospital', description:'Doctor Visit', amount:50},
-        {id:uid(), date:'2025-11-08', category:'Utility Bills', description:'Electricity Bill', amount:100},
-        {id:uid(), date:'2025-11-07', category:'Travel', description:'Train Ticket', amount:40},
-        {id:uid(), date:'2025-11-06', category:'Grocery', description:'Weekly Shopping', amount:80},
+        { id: uid(), date: '2025-11-10', category: 'Food', description: 'Lunch', amount: 12 },
+        { id: uid(), date: '2025-11-09', category: 'Hospital', description: 'Doctor Visit', amount: 50 },
+        { id: uid(), date: '2025-11-08', category: 'Utility Bills', description: 'Electricity Bill', amount: 100 },
+        { id: uid(), date: '2025-11-07', category: 'Travel', description: 'Train Ticket', amount: 40 },
+        { id: uid(), date: '2025-11-06', category: 'Grocery', description: 'Weekly Shopping', amount: 80 },
       ];
       saveState();
       renderTable();
       updateCards();
       updateCharts();
     }
-    function clearAll(){
-      if(!confirm('Clear all transactions?')) return;
+    function clearAll() {
+      if (!confirm('Clear all transactions?')) return;
       expenses = [];
       saveState();
       renderTable();
@@ -553,12 +647,12 @@
     }
 
     // Add expense
-    function addExpense(){
+    function addExpense() {
       const date = document.getElementById('date').value;
       const category = document.getElementById('category').value;
       const description = document.getElementById('description').value.trim();
       const amount = Number(document.getElementById('amount').value);
-      if(!date || !category || !description || !amount){
+      if (!date || !category || !description || !amount) {
         showPopup('⚠️ Please fill all fields');
         return;
       }
@@ -572,12 +666,12 @@
       document.getElementById('amount').value = '';
       showPopup('✅ Expense added!');
     }
-    function uid(){
+    function uid() {
       return Math.random().toString(36).slice(2) + Date.now().toString(36);
     }
 
     // Rendering table
-    function renderTable(){
+    function renderTable() {
       const tbody = document.querySelector('#transactionTable tbody');
       tbody.innerHTML = '';
       getFiltered().forEach(tx => {
@@ -601,14 +695,14 @@
     }
 
     // Edit workflow
-    function startEdit(id){
+    function startEdit(id) {
       const tr = document.querySelector(`tr[data-id="${id}"]`);
-      const tx = expenses.find(e=>e.id===id);
+      const tx = expenses.find(e => e.id === id);
       tr.innerHTML = `
         <td><input type="date" value="${tx.date}" id="edit-date-${id}"></td>
         <td>
           <select id="edit-cat-${id}">
-            ${['Food','Hospital','Utility Bills','Travel','Grocery','Other'].map(c=>`<option ${c===tx.category?'selected':''}>${c}</option>`).join('')}
+            ${['Food', 'Hospital', 'Utility Bills', 'Travel', 'Grocery', 'Other'].map(c => `<option ${c === tx.category ? 'selected' : ''}>${c}</option>`).join('')}
           </select>
         </td>
         <td><input type="text" value="${escapeHtml(tx.description)}" id="edit-desc-${id}"></td>
@@ -621,16 +715,16 @@
         </td>
       `;
     }
-    function saveEdit(id){
+    function saveEdit(id) {
       const date = document.getElementById(`edit-date-${id}`).value;
       const category = document.getElementById(`edit-cat-${id}`).value;
       const description = document.getElementById(`edit-desc-${id}`).value.trim();
       const amount = Number(document.getElementById(`edit-amt-${id}`).value);
-      if(!date || !category || !description || !amount){
+      if (!date || !category || !description || !amount) {
         showPopup('⚠️ Fill all fields');
         return;
       }
-      const idx = expenses.findIndex(e=>e.id===id);
+      const idx = expenses.findIndex(e => e.id === id);
       expenses[idx] = { id, date, category, description, amount };
       saveState();
       renderTable();
@@ -638,32 +732,32 @@
       updateCharts();
       showPopup('✅ Transaction updated!');
     }
-    function cancelEdit(id){
+    function cancelEdit(id) {
       renderTable(); // simply re-render
     }
-    function deleteTx(id){
-      if(!confirm('Delete this transaction?')) return;
-      expenses = expenses.filter(e=>e.id!==id);
+    function deleteTx(id) {
+      if (!confirm('Delete this transaction?')) return;
+      expenses = expenses.filter(e => e.id !== id);
       saveState();
       renderTable();
       updateCards();
       updateCharts();
       showPopup('🗑️ Transaction deleted');
     }
-    function escapeHtml(str){
+    function escapeHtml(str) {
       const p = document.createElement('p');
       p.textContent = str;
       return p.innerHTML;
     }
 
     // Filters
-    function getFiltered(){
+    function getFiltered() {
       const q = document.getElementById('search').value.toLowerCase().trim();
       const cat = document.getElementById('categoryFilter').value;
       const from = document.getElementById('fromDate').value;
       const to = document.getElementById('toDate').value;
 
-      return expenses.filter(tx=>{
+      return expenses.filter(tx => {
         const matchesText = !q || tx.category.toLowerCase().includes(q) || tx.description.toLowerCase().includes(q);
         const matchesCat = !cat || tx.category === cat;
         const matchesFrom = !from || tx.date >= from;
@@ -671,24 +765,24 @@
         return matchesText && matchesCat && matchesFrom && matchesTo;
       });
     }
-    function filterTable(){
+    function filterTable() {
       renderTable();
       updateCards();
       updateCharts();
     }
 
     // Cards totals
-    function sumThisMonth(){
+    function sumThisMonth() {
       const now = new Date();
-      const month = String(now.getMonth()+1).padStart(2,'0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
       const year = String(now.getFullYear());
       const mm = `${year}-${month}`;
       return expenses
-        .filter(e=>e.date.startsWith(mm))
-        .reduce((s,e)=>s+Number(e.amount),0);
+        .filter(e => e.date.startsWith(mm))
+        .reduce((s, e) => s + Number(e.amount), 0);
     }
-    function updateCards(){
-      const totalExpenses = expenses.reduce((s,e)=>s+Number(e.amount),0);
+    function updateCards() {
+      const totalExpenses = expenses.reduce((s, e) => s + Number(e.amount), 0);
       const thisMonth = sumThisMonth();
       const balanceEl = document.getElementById('balance');
       const expensesEl = document.getElementById('expenses');
@@ -707,7 +801,7 @@
     }
 
     // Charts
-    function initCharts(){
+    function initCharts() {
       const catCtx = document.getElementById('categoryChart').getContext('2d');
       categoryChart = new Chart(catCtx, {
         type: 'pie',
@@ -715,7 +809,7 @@
           labels: [],
           datasets: [{
             data: [],
-            backgroundColor: ['#a8dadc','#ffe5ec','#f1faee','#e63946','#457b9d','#6d6875']
+            backgroundColor: ['#a8dadc', '#ffe5ec', '#f1faee', '#e63946', '#457b9d', '#6d6875']
           }]
         },
         options: {
@@ -743,11 +837,11 @@
         }
       });
     }
-    function updateCharts(){
+    function updateCharts() {
       // Category totals
       const catTotals = {};
-      expenses.forEach(e=>{
-        catTotals[e.category] = (catTotals[e.category]||0) + Number(e.amount);
+      expenses.forEach(e => {
+        catTotals[e.category] = (catTotals[e.category] || 0) + Number(e.amount);
       });
       const catLabels = Object.keys(catTotals);
       const catData = Object.values(catTotals);
@@ -758,23 +852,20 @@
 
       // Monthly trend (YYYY-MM -> sum)
       const monthlyTotals = {};
-      expenses.forEach(e=>{
-        const key = e.date.slice(0,7);
-        monthlyTotals[key] = (monthlyTotals[key]||0) + Number(e.amount);
+      expenses.forEach(e => {
+        const key = e.date.slice(0, 7);
+        monthlyTotals[key] = (monthlyTotals[key] || 0) + Number(e.amount);
       });
       const months = Object.keys(monthlyTotals).sort();
-      const monthData = months.map(m=>monthlyTotals[m]);
+      const monthData = months.map(m => monthlyTotals[m]);
 
       monthlyChart.data.labels = months;
       monthlyChart.data.datasets[0].data = monthData;
       monthlyChart.update();
     }
 
-    // Logout demo
-    document.getElementById('logoutBtn').addEventListener('click', (e)=>{
-      e.preventDefault();
-      showPopup('👋 Logged out (demo)');
-    });
+
   </script>
 </body>
+
 </html>
