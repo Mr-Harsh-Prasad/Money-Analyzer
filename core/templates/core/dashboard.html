@@ -443,14 +443,10 @@
       </div>
 
       <!-- Charts -->
-      <div id="chartsSection" class="charts">
+      <div id="chartsSection" class="charts" style="grid-template-columns: 1fr;">
         <div class="chart-card">
           <h3>Category Spending</h3>
           <canvas id="categoryChart" height="200"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Monthly Trend</h3>
-          <canvas id="monthlyChart" height="200"></canvas>
         </div>
       </div>
 
@@ -501,25 +497,6 @@
           datasets: [{
             data: chartValues,
             backgroundColor: ['#a8dadc', '#457b9d', '#1d3557', '#ffe5ec', '#f1faee', '#e63946'],
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-
-    const trendLabels = JSON.parse('{{ trend_labels|safe }}');
-    const trendData = JSON.parse('{{ trend_data|safe }}');
-
-    if (document.getElementById('monthlyChart')) {
-      const ctx2 = document.getElementById('monthlyChart').getContext('2d');
-      new Chart(ctx2, {
-        type: 'bar',
-        data: {
-          labels: trendLabels,
-          datasets: [{
-            label: 'Expenses',
-            data: trendData,
-            backgroundColor: '#457b9d'
           }]
         },
         options: { responsive: true, maintainAspectRatio: false }
