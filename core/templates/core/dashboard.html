@@ -39,12 +39,16 @@
         display: none;
       }
 
-      /* Hide sidebar on mobile */
+      /* Keeping sidebar hidden on mobile for now */
       .cards {
         grid-template-columns: 1fr;
       }
 
       .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .charts {
         grid-template-columns: 1fr;
       }
 
@@ -56,8 +60,6 @@
       table {
         min-width: 600px;
       }
-
-      /* Force scroll on small screens */
     }
 
     body {
@@ -131,6 +133,14 @@
       border-radius: 8px;
     }
 
+    /* Sidebar Links (simple anchors for now) */
+    .sidebar a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+    }
+
     .sidebar li:hover {
       background: #fff;
       color: var(--red);
@@ -167,6 +177,8 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      width: 100%;
+      /* Full width for sidebar/forms */
     }
 
     .btn:hover {
@@ -208,12 +220,6 @@
 
     .card small {
       color: #666;
-    }
-
-    /* Tools row - Hidden for server-side version initially */
-    .tools {
-      display: none;
-      /* grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 1.5rem; */
     }
 
     /* Add expense form */
@@ -292,41 +298,28 @@
       background: var(--cream);
     }
 
-    /* Charts section - Hidden for now */
+    /* Charts section */
     .charts {
-      display: none;
-      /* display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
     }
 
-    /* Responsive */
-    @media (max-width: 980px) {
-      .dashboard {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        display: none;
-      }
-
-      .cards {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+    .chart-card {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 1rem;
     }
 
-    @media (max-width: 560px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+    .chart-card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--blue);
+      font-size: 1rem;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -346,14 +339,32 @@
     <aside class="sidebar">
       <h3>Menu</h3>
       <ul>
-        <li>Add Expense</li>
-        <li>Transactions</li>
-        <li>Budget</li>
+        <li><a href="#addForm">Add Expense</a></li>
+        <li><a href="#tableSection">Transactions</a></li>
+        <li><a href="#chartsSection">Charts</a></li>
       </ul>
 
+      <!-- Budget Section -->
       <div id="budgetSection" class="budget">
         <label>Monthly Budget</label>
-        <p><i>Coming Soon</i></p>
+        <form method="POST" action="{% url 'core:save_budget' %}">
+          {% csrf_token %}
+          <input type="number" name="budget_amount" placeholder="Enter budget"
+            value="{{ current_budget|floatformat:0 }}" required>
+          <button class="btn" type="submit">Set Budget</button>
+        </form>
+        <div style="margin-top:0.6rem; font-size:0.9rem;">
+          {% if current_budget > 0 %}
+          Target: ₹{{ current_budget }}<br>
+          {% if this_month_expense > current_budget %}
+          <span style="color:var(--red); font-weight:bold;">Over Budget!</span>
+          {% else %}
+          <span style="color:var(--navy);">Remaining: ₹{{ current_budget|add:"-"|add:this_month_expense }}</span>
+          {% endif %}
+          {% else %}
+          <span style="color:#666;">No budget set</span>
+          {% endif %}
+        </div>
       </div>
     </aside>
 
@@ -369,12 +380,12 @@
         <div class="card">
           <h2>Income</h2>
           <p id="income">₹{{ total_income }}</p>
-          <small>Total Income</small>
+          <small>All Time Income</small>
         </div>
         <div class="card">
           <h2>Expenses</h2>
           <p id="expenses">₹{{ total_expense }}</p>
-          <small>Total Expenses</small>
+          <small>All Time Expenses</small>
         </div>
       </div>
 
@@ -410,41 +421,95 @@
             </div>
           </div>
           <div class="form-actions">
-            <button type="submit" class="btn">Add Transaction</button>
+            <button type="submit" class="btn" style="width: auto;">Add Transaction</button>
           </div>
         </form>
+      </div>
+
+      <!-- Charts -->
+      <div id="chartsSection" class="charts">
+        <div class="chart-card">
+          <h3>Category Spending</h3>
+          <canvas id="categoryChart" height="200"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Monthly Trend</h3>
+          <canvas id="monthlyChart" height="200"></canvas>
+        </div>
       </div>
 
       <!-- Transactions Table -->
       <div id="tableSection" style="margin-top:1rem;">
         <h2 style="color:var(--blue);">Recent Transactions</h2>
-        <table id="transactionTable">
-          <thead>
-            <tr>
-              <th style="width:110px;">Date</th>
-              <th style="width:140px;">Category</th>
-              <th>Description</th>
-              <th style="width:120px;">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for t in transactions %}
-            <tr>
-              <td>{{ t.date }}</td>
-              <td>{{ t.get_category_display }}</td>
-              <td>{{ t.note }}</td>
-              <td>₹{{ t.amount }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td colspan="4" style="text-align:center;">No transactions found.</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table id="transactionTable">
+            <thead>
+              <tr>
+                <th style="width:110px;">Date</th>
+                <th style="width:140px;">Category</th>
+                <th>Description</th>
+                <th style="width:120px;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in transactions %}
+              <tr>
+                <td>{{ t.date }}</td>
+                <td>{{ t.get_category_display }}</td>
+                <td>{{ t.note }}</td>
+                <td>₹{{ t.amount }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" style="text-align:center;">No transactions found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   </div>
+
+  <script>
+    // Initialize Charts with Django Data
+    const chartLabels = JSON.parse('{{ chart_labels|safe }}');
+    const chartValues = JSON.parse('{{ chart_values|safe }}');
+
+    if (document.getElementById('categoryChart')) {
+      const ctx = document.getElementById('categoryChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            data: chartValues,
+            backgroundColor: ['#a8dadc', '#457b9d', '#1d3557', '#ffe5ec', '#f1faee', '#e63946'],
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    const trendLabels = JSON.parse('{{ trend_labels|safe }}');
+    const trendData = JSON.parse('{{ trend_data|safe }}');
+
+    if (document.getElementById('monthlyChart')) {
+      const ctx2 = document.getElementById('monthlyChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: trendLabels,
+          datasets: [{
+            label: 'Expenses',
+            data: trendData,
+            backgroundColor: '#457b9d'
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+  </script>
 </body>
 
 </html>

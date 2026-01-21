@@ -33,22 +33,79 @@ def user_logout(request):
   logout(request)
   return redirect('core:login')
 
+import json
+from django.utils import timezone
+from datetime import datetime
+from django.db.models import Sum
+from django.core.serializers.json import DjangoJSONEncoder
+
 @login_required
 def dashboard(request):
   user = request.user
-  # quick stats
+  now = timezone.now()
+  current_month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+  
+  # --- Budget Logic ---
+  # Simple budget implementation: One budget object per user (or per month).
+  # For simplicity, we'll try to get a 'current month' budget or a general one.
+  # Let's check models.py: Budget has 'month'.
+  # We will try to get the budget for this month.
+  from .models import Budget
+  try:
+      budget_obj = Budget.objects.get(user=user, month__year=now.year, month__month=now.month)
+      current_budget = budget_obj.limit
+  except Budget.DoesNotExist:
+      current_budget = 0
+
+  # --- Quick Stats ---
   total_income = Transaction.objects.filter(user=user, is_income=True).aggregate(total=Sum('amount'))['total'] or 0
   total_expense = Transaction.objects.filter(user=user, is_income=False).aggregate(total=Sum('amount'))['total'] or 0
   balance = total_income - total_expense
   
+  # Expense this month
+  this_month_expense = Transaction.objects.filter(
+      user=user, is_income=False, date__gte=current_month_start
+  ).aggregate(total=Sum('amount'))['total'] or 0
+
+  # --- Chart Data 1: Category Spending ---
+  category_data = Transaction.objects.filter(user=user, is_income=False)\
+      .values('category')\
+      .annotate(total=Sum('amount'))\
+      .order_by('-total')
+  
+  chart_labels = [c['category'] for c in category_data]
+  chart_values = [float(c['total']) for c in category_data]
+
+  # --- Chart Data 2: Monthly Trend (Last 6 months) ---
+  # Simplified for now: Just show recent transactions trend or dummy last 6 months
+  # Implementation: Group by month. Doing this in SQLite/Postgres agnostic way is tricky without TruncMonth.
+  # We'll import TruncMonth.
+  from django.db.models.functions import TruncMonth
+  monthly_trend = Transaction.objects.filter(user=user, is_income=False)\
+      .annotate(month=TruncMonth('date'))\
+      .values('month')\
+      .annotate(total=Sum('amount'))\
+      .order_by('month')[:6]
+      
+  trend_labels = [m['month'].strftime('%b %Y') for m in monthly_trend]
+  trend_data = [float(m['total']) for m in monthly_trend]
+
   transactions = Transaction.objects.filter(user=user).order_by('-date', '-created_at')[:5]
 
-  return render(request, 'core/dashboard.html', {
+  context = {
       'total_income': total_income,
       'total_expense': total_expense,
       'balance': balance,
-      'transactions': transactions
-  })
+      'transactions': transactions,
+      'current_budget': current_budget,
+      'this_month_expense': this_month_expense,
+      'chart_labels': json.dumps(chart_labels, cls=DjangoJSONEncoder),
+      'chart_values': json.dumps(chart_values, cls=DjangoJSONEncoder),
+      'trend_labels': json.dumps(trend_labels, cls=DjangoJSONEncoder),
+      'trend_data': json.dumps(trend_data, cls=DjangoJSONEncoder),
+  }
+
+  return render(request, 'core/dashboard.html', context)
 
 @login_required
 def add_transaction(request):
@@ -83,3 +140,24 @@ def reports(request):
 @login_required
 def profile(request):
     return render(request, 'core/profile.html')
+
+@login_required
+def save_budget(request):
+    if request.method == 'POST':
+        amount = request.POST.get('budget_amount')
+        from .models import Budget
+        from django.utils import timezone
+        now = timezone.now()
+        # Update or Create budget for this month
+        budget, created = Budget.objects.get_or_create(
+            user=request.user, 
+            month__year=now.year, 
+            month__month=now.month,
+            defaults={'limit': amount, 'month': now.date()}
+        )
+        if not created:
+            budget.limit = amount
+            budget.save()
+            
+        return redirect('core:dashboard')
+    return redirect('core:dashboard')
