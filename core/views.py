@@ -120,24 +120,26 @@ def add_transaction(request):
         if form.is_valid():
             transaction = form.save(commit=False)
             transaction.user = request.user
-            # Logic to determine is_income from category or form?
-            # Model has is_income. Form does NOT have is_income field explicitly exposed in fields list in my previous step?
-            # Wait, in models.py 'is_income' is a field. In forms.py Meta fields = ['category', 'amount', 'note', 'date'].
-            # So 'is_income' is missing from form. I should infer it or add it.
-            # INFERENCE: If category is SAVINGS or similar? 
-            # Actually, the original app.py had `Category` as TextChoices. 
-            # I'll check `models.py`... `is_income` is a boolean.
-            # I will default it to False for now or check if I should add it to form.
-            # For this refactor I'll add it to form or just let it be default False (Expense).
-            # BETTER: Update TransactionForm in next step if needed, or just set it here.
-            # Let's simple set it to False (Expression) unless category is 'SAVINGS' (maybe income?? no).
-            # A strict refactor would expose it. I'll add it to the instance if it was in the POST, but it's not in form.
-            # I will blindly save for now.
+            
+            # Handle Transaction Type (Income/Expense)
+            txn_type = request.POST.get('type')
+            if txn_type == 'income':
+                transaction.is_income = True
+            else:
+                transaction.is_income = False
+                
             transaction.save()
             return redirect('core:dashboard')
     else:
         form = TransactionForm()
     return render(request, 'core/add_transaction.html', {'form': form})
+
+@login_required
+def clear_data(request):
+    if request.method == 'POST':
+        from .models import Transaction
+        Transaction.objects.filter(user=request.user).delete()
+    return redirect('core:dashboard')
 
 @login_required
 def reports(request):

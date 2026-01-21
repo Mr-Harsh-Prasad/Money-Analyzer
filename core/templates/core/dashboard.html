@@ -365,6 +365,15 @@
           <span style="color:#666;">No budget set</span>
           {% endif %}
         </div>
+
+        <form method="POST" action="{% url 'core:clear_data' %}"
+          style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+          {% csrf_token %}
+          <label style="color: var(--red);">Danger Zone</label>
+          <button class="btn" style="background: white; color: var(--red); border: 1px solid var(--red);"
+            onclick="return confirm('Are you sure you want to delete ALL transactions? This cannot be undone.')">Reset
+            All Data</button>
+        </form>
       </div>
     </aside>
 
@@ -396,6 +405,13 @@
           {% csrf_token %}
           <div class="form-grid">
             <div>
+              <label for="type">Type</label>
+              <select id="type" name="type" required>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </div>
+            <div>
               <label for="date">Date</label>
               <input type="date" id="date" name="date" required>
             </div>
@@ -413,11 +429,11 @@
             </div>
             <div>
               <label for="note">Description</label>
-              <input type="text" id="note" name="note" placeholder="e.g., Lunch at cafe" required>
+              <input type="text" id="note" name="note" placeholder="e.g., Salary" required>
             </div>
             <div>
               <label for="amount">Amount</label>
-              <input type="number" id="amount" name="amount" placeholder="e.g., 450" step="0.01" required>
+              <input type="number" id="amount" name="amount" placeholder="e.g., 5000" step="0.01" required>
             </div>
           </div>
           <div class="form-actions">
