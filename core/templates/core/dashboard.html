@@ -442,14 +442,6 @@
         </form>
       </div>
 
-      <!-- Charts -->
-      <div id="chartsSection" class="charts" style="grid-template-columns: 1fr;">
-        <div class="chart-card">
-          <h3>Category Spending</h3>
-          <canvas id="categoryChart" height="200"></canvas>
-        </div>
-      </div>
-
       <!-- Transactions Table -->
       <div id="tableSection" style="margin-top:1rem;">
         <h2 style="color:var(--blue);">Recent Transactions</h2>
@@ -483,26 +475,6 @@
     </main>
   </div>
 
-  <script>
-    // Initialize Charts with Django Data
-    const chartLabels = JSON.parse('{{ chart_labels|safe }}');
-    const chartValues = JSON.parse('{{ chart_values|safe }}');
-
-    if (document.getElementById('categoryChart')) {
-      const ctx = document.getElementById('categoryChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: chartLabels,
-          datasets: [{
-            data: chartValues,
-            backgroundColor: ['#a8dadc', '#457b9d', '#1d3557', '#ffe5ec', '#f1faee', '#e63946'],
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-  </script>
 </body>
 
 </html>

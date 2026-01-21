@@ -67,17 +67,6 @@ def dashboard(request):
       user=user, is_income=False, date__gte=current_month_start
   ).aggregate(total=Sum('amount'))['total'] or 0
 
-  # --- Chart Data 1: Category Spending ---
-  category_data = Transaction.objects.filter(user=user, is_income=False)\
-      .values('category')\
-      .annotate(total=Sum('amount'))\
-      .order_by('-total')
-  
-  chart_labels = [c['category'] for c in category_data]
-  chart_values = [float(c['total']) for c in category_data]
-
-  transactions = Transaction.objects.filter(user=user).order_by('-date', '-created_at')[:5]
-
   context = {
       'total_income': total_income,
       'total_expense': total_expense,
@@ -85,8 +74,6 @@ def dashboard(request):
       'transactions': transactions,
       'current_budget': current_budget,
       'this_month_expense': this_month_expense,
-      'chart_labels': json.dumps(chart_labels, cls=DjangoJSONEncoder),
-      'chart_values': json.dumps(chart_values, cls=DjangoJSONEncoder),
   }
 
   return render(request, 'core/dashboard.html', context)
