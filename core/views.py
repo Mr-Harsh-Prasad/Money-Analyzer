@@ -80,15 +80,21 @@ def dashboard(request):
   # Simplified for now: Just show recent transactions trend or dummy last 6 months
   # Implementation: Group by month. Doing this in SQLite/Postgres agnostic way is tricky without TruncMonth.
   # We'll import TruncMonth.
+  # --- Chart Data 2: Monthly Trend (Last 6 months) ---
+  # We use order_by() first to clear any default ordering that might mess up the GROUP BY.
+  # We order by '-month' to get the LATEST 6 months, then reverse them for display.
   from django.db.models.functions import TruncMonth
   monthly_trend = Transaction.objects.filter(user=user, is_income=False)\
       .annotate(month=TruncMonth('date'))\
       .values('month')\
       .annotate(total=Sum('amount'))\
-      .order_by('month')[:6]
+      .order_by('-month')[:6]
       
-  trend_labels = [m['month'].strftime('%b %Y') for m in monthly_trend]
-  trend_data = [float(m['total']) for m in monthly_trend]
+  # Reverse to show Oldest -> Newest left to right
+  monthly_trend_list = list(reversed(monthly_trend))
+  
+  trend_labels = [m['month'].strftime('%b %Y') for m in monthly_trend_list]
+  trend_data = [float(m['total']) for m in monthly_trend_list]
 
   transactions = Transaction.objects.filter(user=user).order_by('-date', '-created_at')[:5]
 
