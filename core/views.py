@@ -79,3 +79,7 @@ def add_transaction(request):
 @login_required
 def reports(request):
     return render(request, 'core/reports.html')
+
+@login_required
+def profile(request):
+    return render(request, 'core/profile.html')

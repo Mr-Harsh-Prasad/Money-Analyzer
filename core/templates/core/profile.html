@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>User Profile</title>
@@ -13,12 +14,15 @@
 
     /* Header Navigation */
     header {
-      background: #a8dadc; /* pastel teal */
+      background: #a8dadc;
+      /* pastel teal */
       padding: 1rem;
     }
+
     nav {
       text-align: center;
     }
+
     nav a {
       margin: 0 15px;
       color: #fff;
@@ -26,28 +30,33 @@
       font-weight: 500;
       font-size: 1.1rem;
     }
+
     nav a:hover {
-      color: #ffe5ec; /* pastel pink hover */
+      color: #ffe5ec;
+      /* pastel pink hover */
     }
 
     /* Profile Container */
     .profile-container {
       max-width: 900px;
       margin: 2rem auto;
-      background: #f1faee; /* pastel cream */
+      background: #f1faee;
+      /* pastel cream */
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     }
 
     .profile-header {
       text-align: center;
       margin-bottom: 2rem;
     }
+
     .profile-header h2 {
       margin: 0.5rem 0;
       color: #1d3557;
     }
+
     .profile-header p {
       color: #6d6875;
       font-size: 1rem;
@@ -57,6 +66,7 @@
     .section {
       margin-bottom: 2rem;
     }
+
     .section h3 {
       color: #457b9d;
       margin-bottom: 1rem;
@@ -69,16 +79,19 @@
       background: #fafafa;
       padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       margin-bottom: 1rem;
     }
+
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
       color: #1d3557;
     }
-    input, select {
+
+    input,
+    select {
       width: 100%;
       padding: 0.8rem;
       margin-bottom: 1rem;
@@ -86,10 +99,13 @@
       border-radius: 8px;
       font-size: 1rem;
     }
-    input:focus, select:focus {
+
+    input:focus,
+    select:focus {
       border-color: #a8dadc;
       outline: none;
     }
+
     .save-btn {
       background: #a8dadc;
       color: #fff;
@@ -99,6 +115,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .save-btn:hover {
       background: #457b9d;
     }
@@ -114,20 +131,33 @@
       color: #fff;
       padding: 1.5rem 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       font-size: 1.2rem;
       text-align: center;
       z-index: 1000;
     }
+
     .popup.show {
       display: block;
       animation: fadeInOut 3s forwards;
     }
+
     @keyframes fadeInOut {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
+      0% {
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     /* Logout Button */
@@ -137,27 +167,30 @@
       margin: 2rem auto 0;
       padding: 0.8rem;
       text-align: center;
-      background: #e63946; /* pastel red */
+      background: #e63946;
+      /* pastel red */
       color: #fff;
       font-weight: bold;
       border-radius: 8px;
       text-decoration: none;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
+
     .logout-btn:hover {
       background: #d62839;
     }
   </style>
 </head>
+
 <body>
   <!-- Navigation Bar -->
   <header>
     <nav>
-      <a href="homepage.html">Home</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="signup.html">Signup</a>
-      <a href="login.html">Login</a>
-      <a href="profile.html">Profile</a>
+      <a href="{% url 'core:dashboard' %}">Home</a>
+      <a href="{% url 'core:dashboard' %}">Dashboard</a>
+      <a href="{% url 'core:register' %}">Signup</a>
+      <a href="{% url 'core:login' %}">Login</a>
+      <a href="{% url 'core:profile' %}">Profile</a>
     </nav>
   </header>
 
@@ -236,7 +269,7 @@
     </div>
 
     <!-- Logout -->
-    <a href="login.html" class="logout-btn">Logout</a>
+    <a href="{% url 'core:logout' %}" class="logout-btn">Logout</a>
   </div>
 
   <!-- Success Popup -->
@@ -253,4 +286,5 @@
     }
   </script>
 </body>
+
 </html>

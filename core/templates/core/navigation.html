@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Expense Tracker Dashboard</title>
@@ -13,12 +14,15 @@
 
     /* Header Navigation */
     header {
-      background: #a8dadc; /* pastel teal */
+      background: #a8dadc;
+      /* pastel teal */
       padding: 1rem;
     }
+
     nav {
       text-align: center;
     }
+
     nav a {
       margin: 0 15px;
       color: #fff;
@@ -26,8 +30,10 @@
       font-weight: 500;
       font-size: 1.1rem;
     }
+
     nav a:hover {
-      color: #ffe5ec; /* pastel pink hover */
+      color: #ffe5ec;
+      /* pastel pink hover */
     }
 
     /* Layout */
@@ -39,26 +45,32 @@
 
     /* Sidebar */
     .sidebar {
-      background: #f1faee; /* pastel cream */
+      background: #f1faee;
+      /* pastel cream */
       padding: 1.5rem;
       border-right: 2px solid #e0e0e0;
     }
+
     .sidebar h3 {
       margin-bottom: 1rem;
       color: #457b9d;
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
     }
+
     .sidebar ul li {
       margin: 0.8rem 0;
       cursor: pointer;
       color: #1d3557;
       font-weight: 500;
     }
+
     .sidebar ul li:hover {
-      color: #e63946; /* pastel red accent */
+      color: #e63946;
+      /* pastel red accent */
     }
 
     /* Main content */
@@ -72,19 +84,23 @@
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
+
     .card {
       flex: 1;
-      background: #ffe5ec; /* pastel pink */
+      background: #ffe5ec;
+      /* pastel pink */
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
+
     .card h2 {
       margin: 0;
       font-size: 1.2rem;
       color: #6d6875;
     }
+
     .card p {
       font-size: 1.6rem;
       font-weight: bold;
@@ -100,29 +116,34 @@
       border-radius: 8px;
       overflow: hidden;
     }
-    th, td {
+
+    th,
+    td {
       padding: 1rem;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
+
     th {
       background: #a8dadc;
       color: #fff;
     }
+
     tr:hover {
       background: #f1faee;
     }
   </style>
 </head>
+
 <body>
   <!-- Navigation Bar -->
   <header>
     <nav>
-      <a href="homepage.html">Home</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="signup.html">Signup</a>
-      <a href="login.html">Login</a>
-      <a href="profile.html">Profile</a>
+      <a href="{% url 'core:dashboard' %}">Home</a>
+      <a href="{% url 'core:dashboard' %}">Dashboard</a>
+      <a href="{% url 'core:register' %}">Signup</a>
+      <a href="{% url 'core:login' %}">Login</a>
+      <a href="{% url 'core:profile' %}">Profile</a>
     </nav>
   </header>
 
@@ -202,4 +223,5 @@
     </main>
   </div>
 </body>
+
 </html>

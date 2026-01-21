@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +20,11 @@
       --lavender: #e8e4ff;
 
       /* Buttons */
-      --primary: #a7c7e7;       /* pastel blue */
+      --primary: #a7c7e7;
+      /* pastel blue */
       --primary-600: #91b3d0;
-      --soft: #f4f7ff;          /* very light blue */
+      --soft: #f4f7ff;
+      /* very light blue */
       --outline: #b6c9ff;
 
       --card: #ffffff;
@@ -29,8 +32,15 @@
       --radius: 14px;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -42,8 +52,15 @@
         var(--bg);
     }
 
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1100px, 92%); margin: 0 auto; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
 
     /* Header */
     .site-header {
@@ -54,50 +71,105 @@
       border-bottom: 1px solid rgba(180, 180, 200, 0.28);
       z-index: 10;
     }
+
     .header-inner {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 14px 0;
     }
+
     .brand {
-      font-weight: 700; letter-spacing: 0.2px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
       background: linear-gradient(90deg, #6aa9ff, #b69cff);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       font-size: 1.2rem;
     }
-    .auth-nav { display: flex; gap: 10px; align-items: center; }
+
+    .auth-nav {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
     .link {
       padding: 10px 14px;
       border-radius: 10px;
       color: var(--muted);
     }
+
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 10px 18px; border-radius: 12px; font-weight: 500;
-      box-shadow: var(--shadow); transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-600); }
-    .btn-soft { background: var(--soft); border: 1px solid #e3e8ff; color: #3b4b6b; }
-    .btn-outline { background: #fff; border: 1px solid var(--outline); }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-600);
+    }
+
+    .btn-soft {
+      background: var(--soft);
+      border: 1px solid #e3e8ff;
+      color: #3b4b6b;
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid var(--outline);
+    }
 
     /* Hero */
-    .hero { padding: 80px 0 40px; }
-    .hero-inner {
-      display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: center;
+    .hero {
+      padding: 80px 0 40px;
     }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
     .hero-copy h1 {
       font-size: clamp(2rem, 4vw, 3rem);
       margin: 0 0 12px;
     }
+
     .hero-copy p {
       color: var(--muted);
       font-size: 1.05rem;
       max-width: 560px;
     }
-    .hero-cta { display: flex; gap: 12px; margin-top: 22px; }
 
-    .hero-visual { display: grid; gap: 16px; }
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-visual {
+      display: grid;
+      gap: 16px;
+    }
+
     .mock-card {
       background: var(--card);
       border: 1px solid rgba(180, 180, 200, 0.25);
@@ -105,11 +177,19 @@
       box-shadow: var(--shadow);
       padding: 18px;
     }
+
     .mock-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-bottom: 1px dashed rgba(180, 180, 200, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(180, 180, 200, 0.35);
     }
-    .mock-row:last-child { border-bottom: none; }
+
+    .mock-row:last-child {
+      border-bottom: none;
+    }
+
     .mock-chart {
       height: 140px;
       border-radius: var(--radius);
@@ -118,10 +198,16 @@
     }
 
     /* Features */
-    .features { padding: 40px 0 80px; }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    .features {
+      padding: 40px 0 80px;
     }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
     .feature-card {
       background: var(--card);
       border: 1px solid rgba(180, 180, 200, 0.25);
@@ -130,41 +216,63 @@
       padding: 20px;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
-    .feature-card:hover { transform: translateY(-4px); }
-    .feature-icon { font-size: 1.6rem; }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+    }
 
     /* Footer */
     .site-footer {
       border-top: 1px solid rgba(180, 180, 200, 0.25);
       background: rgba(255, 255, 255, 0.65);
     }
+
     .footer-inner {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 18px 0;
     }
-    .footer-nav { display: flex; gap: 16px; }
+
+    .footer-nav {
+      display: flex;
+      gap: 16px;
+    }
 
     /* Responsive */
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
     }
+
     @media (max-width: 700px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .auth-nav .btn { padding: 8px 14px; }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-nav .btn {
+        padding: 8px 14px;
+      }
     }
   </style>
   <!-- Optional: inline font fallback (no external request) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 </head>
+
 <body>
   <!-- Top navigation -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/">ExpenseEase</a>
       <nav class="auth-nav">
-        <a href="login.html" class="link">Log In</a>
-        <a href="signup.html" class="btn btn-outline">Sign Up</a>
+        <a href="{% url 'core:login' %}" class="link">Log In</a>
+        <a href="{% url 'core:register' %}" class="btn btn-outline">Sign Up</a>
       </nav>
     </div>
   </header>
@@ -176,8 +284,8 @@
         <h1>Track your expenses beautifully</h1>
         <p>Manage your money with ease and elegance. Clear summaries, smart filters, and soothing pastel visuals.</p>
         <div class="hero-cta">
-          <a href="signup.html" class="btn btn-primary">Get started</a>
-          <a href="login.html" class="btn btn-soft">I already have an account</a>
+          <a href="{% url 'core:register' %}" class="btn btn-primary">Get started</a>
+          <a href="{% url 'core:login' %}" class="btn btn-soft">I already have an account</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -230,4 +338,5 @@
     </div>
   </footer>
 </body>
+
 </html>

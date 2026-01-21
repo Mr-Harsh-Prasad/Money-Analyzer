@@ -155,9 +155,9 @@
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html">ExpenseEase</a>
+      <a class="brand" href="{% url 'core:dashboard' %}">ExpenseEase</a>
       <nav class="auth-nav">
-        <a href="signup.html" class="btn btn-outline">Sign Up</a>
+        <a href="{% url 'core:register' %}" class="btn btn-outline">Sign Up</a>
       </nav>
     </div>
   </header>
@@ -174,7 +174,7 @@
       </form>
       <div class="footer">
         <a href="#">Forgot Password?</a><br>
-        Don’t have an account? <a href="signup.html">Sign Up</a>
+        Don’t have an account? <a href="{% url 'core:register' %}">Sign Up</a>
       </div>
     </div>
   </div>
