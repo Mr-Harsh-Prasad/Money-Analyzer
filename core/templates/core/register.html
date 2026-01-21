@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExpenseEase • Sign Up</title>
+  <style>
+    :root {
+      --bg: #fcfcff;
+      --text: #2d2d35;
+      --muted: #5b5b67;
+      --primary: #a7c7e7;
+      --primary-600: #91b3d0;
+      --soft: #f4f7ff;
+      --outline: #b6c9ff;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(34, 40, 49, 0.08);
+      --radius: 14px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at -10% -10%, #ffd6e7 0%, transparent 70%),
+        radial-gradient(900px 500px at 110% 0%, #d9f6ea 0%, transparent 70%),
+        radial-gradient(900px 600px at 0% 110%, #e8e4ff 0%, transparent 70%),
+        var(--bg);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(500px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .site-header {
+      backdrop-filter: saturate(140%) blur(10px);
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(180, 180, 200, 0.28);
+      padding: 14px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-weight: 700;
+      background: linear-gradient(90deg, #6aa9ff, #b69cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.2rem;
+    }
+
+    .auth-nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid var(--outline);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-600);
+    }
+
+    /* Signup form */
+    .signup-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-top: 60px;
+    }
+
+    .signup-card h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: var(--primary-600);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">ExpenseEase</a>
+      <nav class="auth-nav">
+        <a href="login.html" class="btn btn-outline">Log In</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Signup form -->
+  <div class="container">
+    <div class="signup-card">
+      <h2>Create Account</h2>
+      <form action="{% url 'core:register' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="footer">
+        Already have an account? <a href="login.html">Log In</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

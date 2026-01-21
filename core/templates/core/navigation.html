@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Tracker Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+      color: #333;
+    }
+
+    /* Header Navigation */
+    header {
+      background: #a8dadc; /* pastel teal */
+      padding: 1rem;
+    }
+    nav {
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    nav a:hover {
+      color: #ffe5ec; /* pastel pink hover */
+    }
+
+    /* Layout */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: #f1faee; /* pastel cream */
+      padding: 1.5rem;
+      border-right: 2px solid #e0e0e0;
+    }
+    .sidebar h3 {
+      margin-bottom: 1rem;
+      color: #457b9d;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 0.8rem 0;
+      cursor: pointer;
+      color: #1d3557;
+      font-weight: 500;
+    }
+    .sidebar ul li:hover {
+      color: #e63946; /* pastel red accent */
+    }
+
+    /* Main content */
+    .main {
+      padding: 2rem;
+    }
+
+    /* Cards */
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      flex: 1;
+      background: #ffe5ec; /* pastel pink */
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #6d6875;
+    }
+    .card p {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      color: #1d3557;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fafafa;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #a8dadc;
+      color: #fff;
+    }
+    tr:hover {
+      background: #f1faee;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="signup.html">Signup</a>
+      <a href="login.html">Login</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Menu</h3>
+      <ul>
+        <li>Overview</li>
+        <li>Add Expense</li>
+        <li>Categories</li>
+        <li>Reports</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="cards">
+        <div class="card">
+          <h2>Total Balance</h2>
+          <p>$1200</p>
+        </div>
+        <div class="card">
+          <h2>This Month’s Expenses</h2>
+          <p>$450</p>
+        </div>
+        <div class="card">
+          <h2>Savings</h2>
+          <p>$300</p>
+        </div>
+      </div>
+
+      <h2>Recent Transactions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-11-10</td>
+            <td>Food</td>
+            <td>Lunch</td>
+            <td>$12</td>
+          </tr>
+          <tr>
+            <td>2025-11-09</td>
+            <td>Hospital</td>
+            <td>Doctor Visit</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>2025-11-08</td>
+            <td>Utility Bills</td>
+            <td>Electricity Bill</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>2025-11-07</td>
+            <td>Travel</td>
+            <td>Train Ticket</td>
+            <td>$40</td>
+          </tr>
+          <tr>
+            <td>2025-11-06</td>
+            <td>Grocery</td>
+            <td>Weekly Shopping</td>
+            <td>$80</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</body>
+</html>

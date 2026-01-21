@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+      color: #333;
+    }
+
+    /* Header Navigation */
+    header {
+      background: #a8dadc; /* pastel teal */
+      padding: 1rem;
+    }
+    nav {
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    nav a:hover {
+      color: #ffe5ec; /* pastel pink hover */
+    }
+
+    /* Profile Container */
+    .profile-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #f1faee; /* pastel cream */
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .profile-header h2 {
+      margin: 0.5rem 0;
+      color: #1d3557;
+    }
+    .profile-header p {
+      color: #6d6875;
+      font-size: 1rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section h3 {
+      color: #457b9d;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #a8dadc;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Editable Form */
+    form {
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #1d3557;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    input:focus, select:focus {
+      border-color: #a8dadc;
+      outline: none;
+    }
+    .save-btn {
+      background: #a8dadc;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .save-btn:hover {
+      background: #457b9d;
+    }
+
+    /* Success Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #a8dadc;
+      color: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 1.2rem;
+      text-align: center;
+      z-index: 1000;
+    }
+    .popup.show {
+      display: block;
+      animation: fadeInOut 3s forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Logout Button */
+    .logout-btn {
+      display: block;
+      width: 200px;
+      margin: 2rem auto 0;
+      padding: 0.8rem;
+      text-align: center;
+      background: #e63946; /* pastel red */
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .logout-btn:hover {
+      background: #d62839;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="signup.html">Signup</a>
+      <a href="login.html">Login</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <!-- Profile Container -->
+  <div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <h2>Vaishnavi Tomar</h2>
+      <p>User Profile</p>
+    </div>
+
+    <!-- Editable Personal Information -->
+    <div class="section">
+      <h3>Personal Information</h3>
+      <form onsubmit="showPopup(event)">
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="vaishnavi@example.com">
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" value="+91 9876543210">
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" value="Modinagar, Uttar Pradesh, India">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob" value="15 March 2003">
+
+        <button type="submit" class="save-btn">Save Personal Info</button>
+      </form>
+    </div>
+
+    <!-- Editable Banking Information -->
+    <div class="section">
+      <h3>Banking Information</h3>
+      <form onsubmit="showPopup(event)">
+        <label for="upi">UPI ID:</label>
+        <input type="text" id="upi" value="vaishnavi@upi">
+
+        <label for="bank">Bank Account:</label>
+        <input type="text" id="bank" value="1234567890 (HDFC Bank)">
+
+        <label for="ifsc">IFSC Code:</label>
+        <input type="text" id="ifsc" value="HDFC0001234">
+
+        <label for="customerId">Customer ID:</label>
+        <input type="text" id="customerId" value="CUST987654">
+
+        <label for="branch">Branch Name:</label>
+        <input type="text" id="branch" value="Modinagar Branch">
+
+        <label for="cardType">Card Type:</label>
+        <input type="text" id="cardType" value="Debit Card">
+
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" value="**** **** **** 1234">
+
+        <button type="submit" class="save-btn">Save Banking Info</button>
+      </form>
+    </div>
+
+    <!-- Editable Settings -->
+    <div class="section">
+      <h3>Profile Settings</h3>
+      <form onsubmit="showPopup(event)">
+        <label for="password">Change Password:</label>
+        <input type="password" id="password" placeholder="Enter new password">
+
+        <label for="notifications">Notifications:</label>
+        <select id="notifications">
+          <option value="enabled" selected>Enabled</option>
+          <option value="disabled">Disabled</option>
+        </select>
+
+        <button type="submit" class="save-btn">Save Settings</button>
+      </form>
+    </div>
+
+    <!-- Logout -->
+    <a href="login.html" class="logout-btn">Logout</a>
+  </div>
+
+  <!-- Success Popup -->
+  <div id="popup" class="popup">✅ Changes saved successfully!</div>
+
+  <script>
+    function showPopup(event) {
+      event.preventDefault(); // prevent form submission
+      const popup = document.getElementById("popup");
+      popup.classList.add("show");
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 3000); // hide after 3 seconds
+    }
+  </script>
+</body>
+</html>
